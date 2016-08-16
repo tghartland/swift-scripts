@@ -1,4 +1,4 @@
-# atlas-scripts
+# swift-scripts
 
 ### delete
 Test deletion rate of an OpenStack container.
