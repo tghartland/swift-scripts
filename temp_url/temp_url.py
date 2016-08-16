@@ -19,10 +19,6 @@ warnings.simplefilter("ignore", DeprecationWarning)
 warnings.simplefilter("ignore", UserWarning)
 
 import urllib2
-try:
-    from urlparse import urlparse
-except ImportError:
-    from urllib.parse import urlparse
 
 import swiftclient
 import swiftclient.service
