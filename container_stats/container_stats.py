@@ -18,32 +18,7 @@ import sys
 from swift_connect import swift_connect
 
 
-conn = swift_connect()
-
-# Get account and print list of containers
-# get_account gets a tuple ({metadata}, [list of containers])
-acc = conn.get_account()
-print(acc[0])
-for i, container in enumerate(acc[1]):
-    print("%s: %s" % (i, container["name"]))
-
-
-while True:
-    index = raw_input("Enter a container to get stats for (or 'exit'): ")
-    if index == "exit":
-        break
-    if not index.isdigit():
-        print("Enter a number")
-        continue
-
-    index = int(index)
-
-    if index < 0 or index >= len(acc[1]):
-        print("Index out of range")
-        continue
-
-    container_name = acc[1][index]["name"]
-
+def stat_container(connection, container_name):
     print("Getting container %s" % container_name)
 
     # get_container gets a tuple with ({metadata}, [list of objects])
@@ -65,3 +40,43 @@ while True:
 
     print("Total objects: %s" % object_count)
     print("Total size: %0.2f %s" % (size, label))
+
+
+conn = swift_connect()
+
+
+# Get account and get list of containers
+# get_account gets a tuple ({metadata}, [list of containers])
+acc = conn.get_account()
+containers = [container["name"] for container in acc[1]]
+
+# Check if a container has been specified as a commandline argument
+if len(sys.argv) > 1:
+    if sys.argv[1] in containers:
+        stat_container(conn, sys.argv[1])
+    else:
+        print("Container \"%s\" not found. Run \"python container_stat.py\" for a list of containers." % sys.argv[1])
+    sys.exit()
+
+# Otherwise show a list of containers
+for i, container in enumerate(containers):
+    print("%s: %s" % (i, container))
+
+# And ask which one to show stats for
+while True:
+    index = raw_input("Enter a container to get stats for (or 'exit'): ")
+    if index == "exit":
+        break
+    if not index.isdigit():
+        print("Enter a number")
+        continue
+
+    index = int(index)
+
+    if index < 0 or index >= len(acc[1]):
+        print("Index out of range")
+        continue
+
+    container_name = acc[1][index]["name"]
+
+    stat_container(conn, container_name)
