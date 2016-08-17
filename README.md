@@ -8,6 +8,15 @@ Generate a temporary url to an object.
 
 ### container_stats
 Interactive command line tool to display usage stats for a container.
+Use
+```
+python container_stats.py
+```
+to choose from a list of available containers or use
+```
+python container_stats.py name
+```
+to see stats for the container with the given name.
 
 ## Requirements
 
