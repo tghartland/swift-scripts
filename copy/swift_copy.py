@@ -9,4 +9,7 @@ def copy(connection, from_path, to_path):
     req.add_header("X-Auth-Token", connection.token)
     req.get_method = lambda: "COPY"
     req.add_header("Destination", to_path)
-    url = opener.open(req)
+    result = opener.open(req)
+    if result.getcode() == 201:
+        print("Copied %s/%s to %s/%s" % (connection.url, from_path, connection.url, to_path))
+    return result
