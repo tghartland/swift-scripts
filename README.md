@@ -18,6 +18,9 @@ python container_stats.py name
 ```
 to see stats for the container with the given name.
 
+### copy
+python-swiftclient doesn't offer any method to copy an object (aside from downloading and uploading with another name), but it is possible to do with a custom HTTP request.
+
 ## Requirements
 
 * Written for Python 2.6, should work with any Python 2 version.
