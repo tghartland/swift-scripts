@@ -1,3 +1,6 @@
+# Author: Thomas Hartland
+# Email: t.hartland@lancaster.ac.uk
+
 import urllib2
 
 def copy(connection, from_path, to_path):
