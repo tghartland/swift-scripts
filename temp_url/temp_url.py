@@ -47,7 +47,10 @@ HTTP_method = "GET"
 temp_url = swiftclient.utils.generate_temp_url(path_to_object, valid_time, secret_key, HTTP_method)
 
 url_base = conn.url
+
+# Strip the "/v1" from the end of the storage url
+# since it's included in the temp url part.
 if url_base.endswith("/v1"):
-    url_base = url_base[:-3] # Strip the "/v1" from the end of the storage url
-                               # since it's included in the temp url part.
+    url_base = url_base[:-3] 
+                               
 print(url_base + temp_url)
