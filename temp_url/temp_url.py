@@ -48,6 +48,6 @@ temp_url = swiftclient.utils.generate_temp_url(path_to_object, valid_time, secre
 
 url_base = conn.url
 if url_base.endswith("/v1"):
-    url_base = url_prefix[:-3] # Strip the "/v1" from the end of the storage url
+    url_base = url_base[:-3] # Strip the "/v1" from the end of the storage url
                                # since it's included in the temp url part.
 print(url_base + temp_url)
